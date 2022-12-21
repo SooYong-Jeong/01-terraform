@@ -12,6 +12,10 @@ resource "aws_iam_user" "example" {
   name  = var.user_names[count.index]
 }
 
-output "alpa_arn" {
-  value = aws_iam_user.example[*].arn
+output "for_direcrive" {
+  value = <<EOF
+	  %{for i in var.user_names}
+		${i}
+	  %{endfor}
+	    EOF
 }
